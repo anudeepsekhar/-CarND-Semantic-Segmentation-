@@ -1,3 +1,35 @@
+# Semantic Segmentation Project (Advanced Deep Learning)
+
+## Introduction
+
+The goal of this project is to construct a fully convolutional neural network based on the VGG-16 image classifier architecture for performing semantic segmentation to identify drivable road area from an car dashcam image (trained and tested on the KITTI data set).
+
+
+## Approach
+
+### Architecture
+
+A pre-trained VGG-16 network was converted to a fully convolutional network by converting the final fully connected layer to a 1x1 convolution and setting the depth equal to the number of desired classes (in this case, two: road and not-road). Performance is improved through the addition of skips between layers to fuse coarse, semantic and  local appearance  information by performing 1x1 convolutions on previous VGG layers (in this case, layers 3 and 4) and adding them element-wise to upsampled (through transposed convolution) lower-level layers (i.e. the 1x1-convolved layer 7 is upsampled before being added to the 1x1-convolved layer 4). Each convolution and transpose convolution layer includes a kernel initializer and regularizer and this skip  architecture is  learned  end-to-end  to  refine  the  semantics  and  spatial precision of the output.
+
+### Augmentation
+I applied a brightness augmentation by converting image to HSV and then scaling up or down the V channel randomly with a factor of 0.3. This was implemented in the gen_batch_function() in helper.py. I also tried other augmentations like translation and flipping, which did not obtain a satisfactory result. 
+
+### Optimizer
+
+The loss function for the network is cross-entropy, and an Adam optimizer is used.
+
+### Training
+
+The hyperparameters used for training are:
+
+  - keep_prob: 0.5
+  - learning_rate: 0.0009
+  - epochs: 50
+  - batch_size: 5
+
+
+---
+## *The following is from the original Udacity repository README*
 # Semantic Segmentation
 ### Introduction
 In this project, you'll label the pixels of a road in images using a Fully Convolutional Network (FCN).
