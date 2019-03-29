@@ -111,16 +111,7 @@ def gen_batch_function(data_folder, image_shape):
                 # Augementation
 				if np.random.random() > 0.5:
 				    image, gt_image = flip_n_translate(image, gt_image)
-                
-#                 # Augmentation implementation:
-#                 if np.random.random()>0.5:
-                    
-#                     # apply flip and translation augmentation
-#                     image, gt_image = flip_n_translate(image, gt_image)
-
-#                     # apply brightness augmentation
-#                     image = augment_brightness(image)
-
+      
 				# Create "one-hot-like" labels by class
 				gt_bg = np.all(gt_image == background_color, axis=2)
 				gt_bg = gt_bg.reshape(*gt_bg.shape, 1)
