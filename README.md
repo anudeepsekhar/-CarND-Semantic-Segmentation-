@@ -26,6 +26,19 @@ The hyperparameters used for training are:
   - learning_rate: 0.0009
   - epochs: 50
   - batch_size: 5
+### Result  
+#### Sample
+
+Below are a few sample images from the output of the fully convolutional network, with the segmentation class overlaid upon the original image in green and the results of the latest run can be found in the runs folder.
+
+![sample1](./runs/run6-1553860835.3995(latest)/um_000005.png)
+![sample2](./runs/run6-1553860835.3995(latest)/um_000013.png)
+![sample3](./runs/run6-1553860835.3995(latest)/um_000014.png)
+![sample4](./runs/run6-1553860835.3995(latest)/um_000017.png)
+![sample5](./runs/run6-1553860835.3995(latest)/um_000029.png)
+![sample1](./runs/run6-1553860835.3995(latest)/um_000039.png)
+
+
 
 
 ---
