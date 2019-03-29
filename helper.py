@@ -110,7 +110,8 @@ def gen_batch_function(data_folder, image_shape):
 				gt_image = scipy.misc.imresize(scipy.misc.imread(gt_image_file), image_shape)
                 # Augementation
 				if np.random.random() > 0.5:
-				    image, gt_image = flip_n_translate(image, gt_image)
+				    #image, gt_image = flip_n_translate(image, gt_image)
+				    augment_brightness(image)
       
 				# Create "one-hot-like" labels by class
 				gt_bg = np.all(gt_image == background_color, axis=2)
@@ -200,3 +201,15 @@ def flip_n_translate(image, gt_image):
         gt_image = cv2.warpAffine(gt_image, trans_M, (cols, rows))
 
     return image, gt_image
+def augment_brightness(image):
+    """Apply brightness augmentation operation to image"""
+    if np.random.random() > 0.5:
+
+        image = cv2.cvtColor(image,cv2.COLOR_RGB2HSV)
+        random_bright = .3+np.random.uniform()
+        
+        # scaling up or down the V channel of HSV
+        image[:,:,2] = image[:,:,2]*random_bright
+        image = cv2.cvtColor(image, cv2.COLOR_HSV2RGB)
+
+    return image
